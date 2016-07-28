@@ -71,7 +71,7 @@ find(
 # Loop through the found files and send them to be parsed.
 for my $file (@files) {
    my ($ext) = $file =~ /(\.[^.]+)$/;
-   if (defined $ext && ($ext eq ".cr2" || $ect eq ".jpg")) {
+   if (defined $ext && ($ext eq ".cr2" || $ext eq ".jpg")) {
       ParseInfo($file, $ext, $directory);
    }
 }
