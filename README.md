@@ -8,8 +8,8 @@ To solve the problem, I made use of the [Perl Exif tool by Phil Harvey][1]:
 
 ## To install:
 
-1. git clone https://github.com/listedegarde/renamed-recovered-canon-raw.git
-2. cd renamed-recovered-cannon-raw.git
+1. git clone https://github.com/listedegarde/rename-recovered-canon-raw.git
+2. cd rename-recovered-cannon-raw.git
 3. wget http://www.sno.phy.queensu.ca/~phil/exiftool/Image-ExifTool-10.24.tar.gz
 4. tar -zxvf Image-ExifTool-10.24.tar.gz
 5. rm Image-ExifTool-10.24.tar.gz
