@@ -28,7 +28,9 @@ sub ParseInfo{
          $date = $info->{$_};
       }
    }
-   RenameFile($directory, $file, $extension, $date, $id);
+   if (defined $id && defined $date) {
+     RenameFile($directory, $file, $extension, $date, $id);
+   }
 }
 
 # Move and rename file:
@@ -37,7 +39,7 @@ sub RenameFile{
    my $filename = shift or die "No filename specified.";
    my $fileext = shift or die "No extension specified.";
    my $filedate = shift or die "No date specified.";
-   my $fileid = shift or die "No location specified.";
+   my $fileid = shift or die "No id specified.";
 
    my $year = substr $filedate, 0, 4;
    my $month = substr $filedate, 5, 2;
