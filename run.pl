@@ -28,7 +28,7 @@ sub ParseInfo{
          $date = $info->{$_};
       }
    }
-   if (defined $id && $id ne "" && defined $date && $date ne "") {
+   if (defined $id && $id ne "" && $id ne "0" && defined $date && $date ne "" && $date ne "0") {
      RenameFile($directory, $file, $extension, $date, $id);
    } else {
      print "Skipped $file - missing ID or date\n";
@@ -38,10 +38,10 @@ sub ParseInfo{
 # Move and rename file:
 sub RenameFile{
    my $directory = shift or die "No directory specified.";
-   my $filename = shift or die "No filename specified.";
-   my $fileext = shift or die "No extension specified.";
-   my $filedate = shift or die "No date specified.";
-   my $fileid = shift or die "No id specified.";
+   my $filename = shift or die "No filename specified. Directory = $directory.";
+   my $fileext = shift or die "No extension specified. Directory = $directory, File = $filename";
+   my $filedate = shift or die "No date specified. Directory = $directory, File = $filename, Extension = $fileext";
+   my $fileid = shift or die "No id specified. Directory = $directory, File = $filename, Extension = $fileext, Date = $filedate";
 
    my $year = substr $filedate, 0, 4;
    my $month = substr $filedate, 5, 2;
@@ -52,11 +52,11 @@ sub RenameFile{
    my $newfile = "$directory$year/$month/$day/IMG_$id" . $fileext;
    
    mkpath($newpath);
-   copy($filename,$newfile) or die "Failed: $filename copy to $newfile: $!";
+   move($filename,$newfile) or die "Failed: $filename move to $newfile: $!";
 
    print "===================\n";
    print "$filename";
-   print " copied to: ";
+   print " moved to: ";
    print "$newfile\n";
 }
 
