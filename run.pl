@@ -28,8 +28,10 @@ sub ParseInfo{
          $date = $info->{$_};
       }
    }
-   if (defined $id && defined $date) {
+   if (defined $id && $id ne "" && defined $date && $date ne "") {
      RenameFile($directory, $file, $extension, $date, $id);
+   } else {
+     print "Skipped $file - missing ID or date\n";
    }
 }
 
