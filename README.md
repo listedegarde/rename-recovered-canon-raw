@@ -18,7 +18,8 @@ To solve the problem, I made use of the [Perl Exif tool by Phil Harvey][1]:
 
 Where ~/Recovered/ is the directory of the recovered files.  
 DO NOT forget to include the trailing slash!
-perl run.pl ~/Recovered/
+
+`perl run.pl ~/Recovered/`
 
 
 Note that this will automatically copy and sort CR2 files into folders by year,
