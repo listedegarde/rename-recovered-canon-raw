@@ -10,10 +10,11 @@ use File::Path;
 use Image::ExifTool ':Public';
 
 
-# Parse CR2 Exif data and send to be renamed 
+# Parse CR2 and JPG Exif data and send to be renamed 
 sub ParseInfo{
    my $file = shift or die "Please specify file";
-   my $directory = shift or die "Please specify file";
+   my $extension = shift or die "Please specify extension";
+   my $directory = shift or die "Please specify directory";
    my $date = "";
    my $id = "";
 
@@ -27,13 +28,14 @@ sub ParseInfo{
          $date = $info->{$_};
       }
    }
-   RenameFile($directory, $file, $date, $id);
+   RenameFile($directory, $file, $extension, $date, $id);
 }
 
 # Move and rename file:
 sub RenameFile{
    my $directory = shift or die "No directory specified.";
    my $filename = shift or die "No filename specified.";
+   my $fileext = shift or die "No extension specified.";
    my $filedate = shift or die "No date specified.";
    my $fileid = shift or die "No location specified.";
 
@@ -43,7 +45,7 @@ sub RenameFile{
    my ($id) = $fileid =~ /\-([^-]+)$/;
 
    my $newpath = "$directory$year/$month/$day/";
-   my $newfile = "$directory$year/$month/$day/IMG_$id.CR2";
+   my $newfile = "$directory$year/$month/$day/IMG_$id" . $fileext;
    
    mkpath($newpath);
    copy($filename,$newfile) or die "Failed: $filename copy to $newfile: $!";
@@ -69,8 +71,8 @@ find(
 # Loop through the found files and send them to be parsed.
 for my $file (@files) {
    my ($ext) = $file =~ /(\.[^.]+)$/;
-   if (defined $ext && $ext eq ".cr2") {
-      ParseInfo($file, $directory);
+   if (defined $ext && ($ext eq ".cr2" || $ect eq ".jpg")) {
+      ParseInfo($file, $ext, $directory);
    }
 }
 
